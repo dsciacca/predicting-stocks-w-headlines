@@ -114,7 +114,7 @@ DJIA['net_change'] = DJIA['Close'] - DJIA['Open']
 DJIA.boxplot(column='net_change')
 plt.title("DJIA Value Net Change Boxplot")
 ```
-![](visualizations/box_plot/DJIA_net_change_boxplot.png)
+![](visualizations/boxplot/DJIA_net_change_boxplot.png)
 
 In this plot, I was interested to see that the wiskers are right around the 250 and -250 marks, which told me that while a net change of a couple hundred is a relatively rare and significant event being near the end of the wiskers, this isn't an outlier, which was interesting to me considering that 50% of net changes are between -60 and 75.
 
@@ -172,11 +172,17 @@ for key in list(cfdist.keys()):
             break
 ```
 With this in place, I then created conditional frequency distribution plots, isolating 5 `Top#` columns at a time in order to actually see distinctions between the columns:
+
 ![](visualizations/freqdist_plots/headline_cumulative_word_counts_top1-5.png)
+
 ![](visualizations/freqdist_plots/headline_cumulative_word_counts_top6-10.png)
+
 ![](visualizations/freqdist_plots/headline_cumulative_word_counts_top11-15.png)
+
 ![](visualizations/freqdist_plots/headline_cumulative_word_counts_top16-20.png)
+
 ![](visualizations/freqdist_plots/headline_cumulative_word_counts_top21-25.png)
+
 From these plots, it appears that the `Top1` column shows an increased mention of `world` while this same column is showing a lower occurance rate of `russia` and `isreali` compared with other columns which, to me, indicates that oftentimes the most popular headlines relate more to global issues rather than individual country issues. Aside from this there weren't any differences that are worth noting.
 
 After that I wanted to create some more interesting and visually appealing visualizations, so I decided to create a word cloud using all of the headlines to get a visual representation of what top headlines overall typically talk about:
@@ -197,6 +203,7 @@ plt.axis('off')
 plt.show()
 ```
 ![](visualizations/wordclouds/headlines_corpus_wordcloud.png)
+
 Clearly many of the top words I mentioned when looking at word frequencies during cleaning are obvious here (US, say, new, police, and government). Something that I found odd, though, is the fact that government and police are actually smaller than other words like China, Israel, Russia, and Iran. I’m not too sure why this is, as I would’ve expected to see the top words from my initial word frequency distributions as the largest words here. 
 
 At this point I was anxious to get on with building my models, so I moved on to the next phase of my project.
@@ -226,7 +233,8 @@ headlines['subjectivity'] = subjectivity
 headlines.head()
 ```
 ![](tables/sentiment_analysis_table_head.png)
-Initially, I was a bit concerned that I was going to end up with unusable scores accross the board for the headlines since they are composed of so many nouns and things that don't necessarily have a polarity or subjectivity associated with them. There are still a number that have scores of 0, but still a few more informative scores which is good. The above is from when I performed this on the headlines dataset itself, I subsequently performed this same process on the combined dataset, which can be seen in the [model building notebook](Predicting%20Stock%20Performance%20with%20Top%20News%20Headlines%20-%20Model Building.ipynb).
+
+Initially, I was a bit concerned that I was going to end up with unusable scores accross the board for the headlines since they are composed of so many nouns and things that don't necessarily have a polarity or subjectivity associated with them. There are still a number that have scores of 0, but still a few more informative scores which is good. The above is from when I performed this on the headlines dataset itself, I subsequently performed this same process on the combined dataset, which can be seen in the [model building notebook](Predicting%20Stock%20Performance%20with%20Top%20News%20Headlines%20-%20Model%20Building.ipynb).
 
 Since I wasn't sure how much individual polarity and subjectivity scores for each of the top 25 headlines from a day would impact the final model, I also obtained overall polarity and subjectivity scores for the headlines from each day as I felt this may be more useful for final predictions. To do this, I converted all the headlines from each day into a single text blob and analyze the sentiment on that:
 ```
@@ -251,8 +259,11 @@ combined[['overall_polarity', 'overall_subjectivity']].head()
 ![](tables/overall_sentiment_head.png)
 
 Now I had overall polarity and subjectivity score for each day, I was interested to see the distributions of these overall sentiment scores for each day:
+
 ![](visualizations/distplots/overall_headline_polarity.png)
+
 ![](visualizations/distplots/overall_headline_polarity.png)
+
 For the most part, headlines generally skew positive on a day to day basis, this is something I wouldn't have expected due to the generally bad reputation the news gets for focusing on the negative! Of course this polarity plot is fairly narrow, only spanning a range of -0.2 to 0.2, indicating to me that, for the most part, headlines don't have much of a positive or negative bias when you look at the big picture. As for subjectivity, it looks like news headlines are, on average, mildly subjective when you look at the big picture, though I'm happy to see that the vast majority of this plot stays below the 0.5 mark indicating to me that, for the most part, headlines focus more on fact than opinion, which I personally believe should be the case.
 
 With that I was done with the sentiment analysis aspect and it was time to move on to the clustering aspect of the model.
@@ -311,7 +322,8 @@ plt.title('Elbow Method For Optimal k')
 plt.savefig("visualizations/lineplots/elbow_method_plot.png")
 plt.show()
 ```
-![](isualizations/lineplots/elbow_method_plot.png)
+![](visualizations/lineplots/elbow_method_plot.png)
+
 Unfortunately there wasn't as obvious an elbow in the plot as I would've liked to see. Even so, there were a couple points where the slope clearly changed. The first of these seem to occur at 5 and 8 clusters, and while I’m used to picking the lower number of clusters, I couldn’t help but notice that the slope from 7 to 8 clusters is quite steep while the slope seems to be more consistently smaller after 8 clusters, so I stuck with 8 clusters for my final clustering model.
 
 With the clusters created, I wanted to see if the clusters really did have some sort of categorical meaning behind them. To determine this, I created Word Clouds by cluster and see if I could recognize some patterns regarding cluster category. Below my code snippet are the resulting clusters and brief desctriptions of the categories I determined about each:
@@ -344,20 +356,35 @@ for i in sorted(headlines['cluster'].unique()):
     gen_wordcloud(headlines[headlines['cluster'] == i]['News_cleaned'], i)
 ```
 ![](visualizations/wordclouds/cluster0_wordcloud.png)
+
 In cluster 0, clearly China and Chinese are mentioned a lot and so are some other countries in this region of the world, like Russia, India, and Japan while the US is also thrown in there. This tells me that cluster 0 is primarily related to China and it's relationships in the world.
+
 ![](visualizations/wordclouds/cluster1_wordcloud.png)
+
 In cluster 1, Iraq and Afghanistan are mentioned the most along with words like war, US, Talian, Syria, soldier, and military. This tells me that cluster 1 is primarily related to war in the middle east
+
 ![](visualizations/wordclouds/cluster2_wordcloud.png)
+
 As for cluster 2, the most common words are killed and Pakistan while there is also mention of other words like civilian, Taliban, strike, death, and people. To me, this is somewhat also related to conflict in the middle east like cluster 1 but more so related to death and injury rather than war itself
+
 ![](visualizations/wordclouds/cluster3_wordcloud.png)
+
 Cluster 3 is clearly contains Korea more than any other word with North and South following near behind along with other words like Korean, Kim, Jong, Un, and Nuclear among others. Clearly this cluster primarily refers to the Koreas and the tension and conflict going on in that region.
+
 ![](visualizations/wordclouds/cluster4_wordcloud.png)
+
 Now looking at cluster 4 I really don't see that much of a clear pattern amongst the words and many of the ones present here remind me of the common words in the overall corpus of headlines. This tells me that this is likely the miscellaneous cluster where things that didn't fit well into other clusters wound up.
+
 ![](visualizations/wordclouds/cluster5_wordcloud.png)
+
 For cluster 5 the most common word is Russian followed by words like Ukraine, Vladimir, Putin, Russia, and Moscow, clearly indicating to me that this cluster primarily holds headlines related to Russia, especially in regards to the Russia-Ukraine conflict
+
 ![](visualizations/wordclouds/cluster6_wordcloud.png)
+
 The most common word in cluster 6 is obviously Isreal followed by words like Gaza, Palestinian, Isreali, settlement, state, and Hamas, which indicates to me that this cluster contains headlines primarily focused on the Palistinian-Isreali conflict over the Gaza strip
+
 ![](visualizations/wordclouds/cluster7_wordcloud.png)
+
 Finally, cluster 7 has Iran as the most common word followed by Nuclear, US, attack, sanction, deal, and Isreal. This indicates to me that this cluster contains primarily headlines that pertain to the Iranian Nuclear Deal and Iran in general.
 
 With that my supporting models were complete and I was ready to move on to the final stock prediction model
