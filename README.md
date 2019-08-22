@@ -445,6 +445,7 @@ print(cm)
 Accuracy of logistic regression classifier on test set: 0.51  
 
 Confusion Matrix
+
 | Actual    | Down | Up  |
 |-----------|------|-----|
 | Predicted |      |     |
@@ -523,6 +524,7 @@ print("\nMean AUC Score")
 print(rfc3_cv_score.mean())
 ```
 Confusion Matrix
+
 | Actual    | Down | Up  |
 |-----------|------|-----|
 | Predicted |      |     |
@@ -530,6 +532,7 @@ Confusion Matrix
 | Up        | 123  | 207 |
 
 Classification Report
+
 |             | precision | recall | f1-score | support |
 |-------------|-----------|--------|----------|---------|
 | 0           | 0.43      | 0.34   | 0.38     | 267     |
