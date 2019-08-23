@@ -540,10 +540,10 @@ Classification Report
 | avg / total | 0.49      | 0.50   | 0.49     | 597     |
 
 
-All AUC Scores
+All AUC Scores  
 \[0.52115365 0.50155763 0.53029846 0.57230429 0.54632263 0.45970057 0.50922888 0.55588597 0.58336751 0.54522149\]
 
-Mean AUC Score
+Mean AUC Score  
 0.5325041101726599
 
 Clearly this model didn't do great, but it did sightly better than the LR model. From the classification report, it is quite clear that this model is better at predicting Up days than Down days as indicated by the higher `precision` and `recall` scores for Up days. Even still, these scores aren't very great. 
@@ -594,4 +594,5 @@ This project has been quite the wild ride! While I didn't end up with a model th
 
 ### References
 Aaron7sun. (2016, August 25). Daily News for Stock Market Prediction. Retrieved July 4, 2019, from https://www.kaggle.com/aaron7sun/stocknews
+
 Beers, B. (2019, June 25). Why do stock prices change based on news reports? Retrieved July 4, 2019, from https://www.investopedia.com/ask/answers/155.asp
