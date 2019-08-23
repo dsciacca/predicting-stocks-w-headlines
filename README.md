@@ -1,5 +1,6 @@
 # Predicting Dow Jones Industrial Average Ups and Downs with Daily Top News Headlines
-MSDS-696 - Data Science Practicum II - Final Project
+MSDS-696 - Data Science Practicum II - Final Project Report  
+[Video Presentation](https://youtu.be/B9-KUZNqPQE)
 
 ![](visualizations/lineplots/stocks_value_plot.png)
 ## Indroduction
