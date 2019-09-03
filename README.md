@@ -3,7 +3,7 @@ MSDS-696 - Data Science Practicum II - Final Project Report
 [Video Presentation](https://youtu.be/B9-KUZNqPQE)
 
 ![](visualizations/lineplots/stocks_value_plot.png)
-## Indroduction
+## Introduction
 In this project, I have attempted to create a stock market performance prediction model using news headlines to assist with better investment performance. News reports can have a profound impact on stock market performance (Beers, 2019), but the problem is that there are so many news articles published every day that it’s nearly impossible for an individual person to be aware of everything going on in the news at any given moment, much less quantify the impact of each article on stock market performance. This project aims to address this issue by using natural language processing (NLP) and clustering on historic news headlines and stock performance from each day to better understand how the news can impact the stock market and, more importantly, assess how these news headlines can be used to predict whether the stock market will rise or fall that day and/or in the near future.
 
 ## The Data
